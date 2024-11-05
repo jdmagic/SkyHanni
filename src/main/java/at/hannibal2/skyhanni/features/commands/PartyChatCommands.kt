@@ -2,6 +2,8 @@ package at.hannibal2.skyhanni.features.commands
 
 import at.hannibal2.skyhanni.SkyHanniMod
 import at.hannibal2.skyhanni.config.features.misc.PartyCommandsConfig
+import at.hannibal2.skyhanni.config.features.event.diana.DianaPartyCommandsConfig
+import at.hannibal2.skyhanni.config.storage.ProfileSpecificStorage
 import at.hannibal2.skyhanni.data.FriendAPI
 import at.hannibal2.skyhanni.data.PartyAPI
 import at.hannibal2.skyhanni.data.hypixel.chat.event.PartyChatEvent
@@ -18,7 +20,9 @@ import kotlin.time.Duration.Companion.seconds
 object PartyChatCommands {
 
     private val config get() = SkyHanniMod.feature.misc.partyCommands
+    private val dianaConfig get() = SkyHanniMod.feature.event.diana.dianaPartyCommands
     private val storage get() = SkyHanniMod.feature.storage
+    private val dianaStorage = ProfileSpecificStorage().diana
 
     data class PartyChatCommand(
         val names: List<String>,
@@ -57,6 +61,53 @@ object PartyChatCommands {
                 HypixelCommands.partyAllInvite()
             }
         ),
+
+        // Diana commands
+        PartyChatCommand(
+            listOf("chim", "chimera", "chims", "chimeras", "book", "books"),
+            { dianaConfig.itemCountCommands },
+            requiresPartyLead = false,
+            executable = {
+                //  TODO    chimBooks = dianaStorage.dianaProfitTrackerPerElectionSeason.
+                HypixelCommands.partyChat("")
+            }
+        ),
+        PartyChatCommand(
+            listOf("relic", "relics"),
+            { dianaConfig.itemCountCommands },
+            requiresPartyLead = false,
+            executable = {}
+        ),
+        PartyChatCommand(
+            listOf("stick", "sticks"),
+            { dianaConfig.itemCountCommands },
+            requiresPartyLead = false,
+            executable = {}
+        ),
+        PartyChatCommand(
+            listOf("feather", "feathers"),
+            { dianaConfig.itemCountCommands },
+            requiresPartyLead = false,
+            executable = {}
+        ),
+        PartyChatCommand(
+            listOf("inq", "inqs", "inquisitor"),
+            { dianaConfig.mobCountCommands },
+            requiresPartyLead = false,
+            executable = {}
+        ),
+        PartyChatCommand(
+            listOf("mobs", "mobs"),
+            { dianaConfig.mobCountCommands },
+            requiresPartyLead = false,
+            executable = {}
+        ),
+        PartyChatCommand(
+            listOf("burrows", "burrow"),
+            { dianaConfig.burrowCountCommand },
+            requiresPartyLead = false,
+            executable = {}
+        )
     )
 
     private val indexedPartyChatCommands = buildMap {
