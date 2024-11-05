@@ -79,6 +79,11 @@ public class DianaConfig {
     public MythologicalMobTrackerConfig mythologicalMobtracker = new MythologicalMobTrackerConfig();
 
     @Expose
+    @ConfigOption(name = "Diana Party Commands", desc = "")
+    @Accordion
+    public DianaPartyCommandsConfig dianaPartyCommands = new DianaPartyCommandsConfig();
+
+    @Expose
     @ConfigOption(name = "All Burrows List", desc = "")
     @Accordion
     public AllBurrowsListConfig allBurrowsList = new AllBurrowsListConfig();
